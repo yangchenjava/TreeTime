@@ -1,0 +1,86 @@
+//
+//  PrefixHeader.pch
+//  TreeTime
+//
+//  Created by yangc on 16/12/7.
+//  Copyright © 2016年 yangc. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+
+// 系统版本
+#define iOS10_OR_Later ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
+#define iOS9_OR_Later ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0)
+#define iOS8_OR_Later ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
+// 判断机型
+#define YC_iPhone5SE ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+#define YC_iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+#define YC_iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
+
+// 屏幕宽高
+#define YC_ScreenWidth \
+([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? [UIScreen mainScreen].nativeBounds.size.width / [UIScreen mainScreen].nativeScale : [UIScreen mainScreen].bounds.size.width)
+
+#define YC_ScreenHeight \
+([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? [UIScreen mainScreen].nativeBounds.size.height / [UIScreen mainScreen].nativeScale : [UIScreen mainScreen].bounds.size.height)
+
+// 控件高度
+#define YC_StatusBarHeight 20.0
+#define YC_NavigationBarHeight 44.0
+#define YC_TabBarHeight 49.0
+#define YC_CellDefaultHeight 44.0
+#define YC_EnglishKeyboardHeight 216.0
+#define YC_ChineseKeyboardHeight 252.0
+
+// 目录
+#define YC_Dir_Temp NSTemporaryDirectory()
+#define YC_Dir_Cache NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject
+#define YC_Dir_Document NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject
+
+// 颜色
+#define YC_Color_Random [UIColor colorWithRed:arc4random_uniform(256) / 255.0 green:arc4random_uniform(256) / 255.0 blue:arc4random_uniform(256) / 255.0 alpha:1.0]
+#define YC_Color_RGBA(R, G, B, A) [UIColor colorWithRed:(R) / 255.0 green:(G) / 255.0 blue:(B) / 255.0 alpha:(A)]
+#define YC_Color_RGB(R, G, B) [UIColor colorWithRed:(R) / 255.0 green:(G) / 255.0 blue:(B) / 255.0 alpha:1.0]
+
+// 加载图片
+#define YC_Image_PNG(name) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(name) ofType:@"png"]]
+#define YC_Image_JPG(name) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(name) ofType:@"jpg"]]
+#define YC_Image(name, ext) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(name) ofType:(ext)]]
+
+// 自动提示宏，想输入对象的属性的时候有提示
+#define YCKeyPath(objc, keyPath) @(((void) objc.keyPath, #keyPath))
+
+// 弱引用/强引用
+#define YCWeakSelf(type) __weak typeof(type) weak##type = type
+#define YCStrongSelf(type) __strong typeof(type) type = weak##type
+
+// 角度转弧度 弧度转角度
+#define YCDegreeToRadian(degree) ((degree) * M_PI / 180.0)
+#define YCRadianToDegree(radian) ((radian) * 180.0 / M_PI)
+
+// 锁屏通知
+#define YCNotificationOff CFSTR("com.apple.springboard.lockcomplete")
+// 解锁通知
+#define YCNotificationOn CFSTR("com.apple.springboard.hasBlankedScreen")
+
+// 控制台日志输出
+#ifdef DEBUG
+    #define YCLog(...) NSLog(__VA_ARGS__)
+#else
+    #define YCLog(...)
+#endif
+
+// ---------------------------------------------------- 分割线 -----------------------------------------------------
+
+#define YC_URL(url) [NSString stringWithFormat:@"http://36.110.50.10:8891/TreeTime/%@", (url)]
+
+#endif
+
+#endif /* PrefixHeader_pch */
