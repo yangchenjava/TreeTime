@@ -13,5 +13,5 @@ target "TreeTime" do
     pod 'MBProgressHUD', '1.0.0'
     pod 'MJRefresh', '3.1.12'
     pod 'SDWebImage', '3.8.2'
-    pod 'YCHelpKit', '~> 1.2.4'
+    pod 'YCHelpKit', '~> 1.2.6'
 end
