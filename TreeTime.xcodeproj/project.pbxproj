@@ -609,7 +609,7 @@
 					0F7435461DF7C32C00C54028 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 53E348DHA3;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
