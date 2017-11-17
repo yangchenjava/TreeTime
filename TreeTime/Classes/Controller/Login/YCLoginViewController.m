@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn_login;
 @property (weak, nonatomic) IBOutlet UIButton *btn_fast;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fastBtnBottomConstraint;
+
 - (IBAction)clickLogin;
 - (IBAction)clickFast;
 
@@ -43,6 +45,11 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewLayoutMarginsDidChange {
+    [super viewLayoutMarginsDidChange];
+    self.fastBtnBottomConstraint.constant = 30 + YC_TabBarBottomSafeMargin;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -105,7 +112,7 @@
 
 - (IBAction)clickLogin {
     if (_textField_username.text.length && _textField_password.text.length) {
-        [MBProgressHUD showMessage:@"登录中，请稍后..."];
+        [MBProgressHUD showMessage:@"登录中，请稍后..." mask:YES];
         YCLoginParam *param = [[YCLoginParam alloc] init];
         param.loginName = _textField_username.text;
         param.loginPassword = _textField_password.text;

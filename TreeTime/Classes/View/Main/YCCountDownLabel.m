@@ -27,10 +27,16 @@ static YCCountDownLabel *_this;
     _this = self;
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, screenLockStateChanged, YCNotificationOff, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, screenLockStateChanged, YCNotificationOn, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+    if (YC_IPhoneX) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    }
 }
 
 - (void)dealloc {
     CFNotificationCenterRemoveEveryObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL);
+    if (YC_IPhoneX) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
     [_timer invalidate];
     _timer = nil;
 }
@@ -48,6 +54,14 @@ static void screenLockStateChanged(CFNotificationCenterRef center, void *observe
             [_this start];
             _this.lockedTime = 0;
         }
+    }
+}
+
+- (void)applicationDidBecomeActiveNotification:(NSNotification *)notification {
+    if (_this.lockedTime && _this.timeout) {
+        _this.timeout -= [NSDate date].timeIntervalSince1970 - _this.lockedTime;
+        [_this start];
+        _this.lockedTime = 0;
     }
 }
 

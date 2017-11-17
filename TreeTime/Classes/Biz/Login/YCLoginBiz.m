@@ -18,7 +18,7 @@
 
 @implementation YCLoginBiz
 
-+ (void)loginWithParam:(YCLoginParam *)param success:(void (^)())success failure:(void (^)(NSString *))failure {
++ (void)loginWithParam:(YCLoginParam *)param success:(void (^)(void))success failure:(void (^)(NSString *))failure {
     NSDictionary *params = [[YCRequest requestWithDevID:nil index:101] JSONDictionaryFromModel:param];
     
     [YCHttpUtils sendPost:YC_URL(@"101") params:params success:^(NSHTTPURLResponse *response, id responseObject) {

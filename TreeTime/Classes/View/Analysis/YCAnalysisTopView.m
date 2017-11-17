@@ -155,6 +155,9 @@
             } else if (YC_iPhone6Plus) {
                 x = -38 * (i % 5 - i / 5);
                 y = -17 * (6 - i % 5 - i / 5);
+            } else {
+                x = -33 * (i % 5 - i / 5);
+                y = -17 * (6 - i % 5 - i / 5);
             }
             
             UIImageView *image_tree = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];

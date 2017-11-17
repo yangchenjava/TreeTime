@@ -107,6 +107,9 @@ static BOOL _locked;
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, screenLockStateChanged, YCNotificationOff, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, screenLockStateChanged, YCNotificationOn, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
+    if (YC_IPhoneX) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    }
     
     _label_countDownTime.delegate = self;
     [_slider addTarget:self action:@selector(sliderValueChanged) forControlEvents:UIControlEventValueChanged];
@@ -140,6 +143,10 @@ static void screenLockStateChanged(CFNotificationCenterRef center, void *observe
     if (!_locked && _label_countDownTime.isStart) {
         [self stop];
     }
+}
+
+- (void)applicationDidBecomeActiveNotification:(NSNotification *)notification {
+    _locked = NO;
 }
 
 #pragma mark - 代理回调

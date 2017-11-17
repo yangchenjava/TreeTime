@@ -39,7 +39,7 @@
     YCAnalysisTopView *topView = [YCAnalysisTopView topViewWithFrame:CGRectMake(0, 0, YC_ScreenWidth, YC_Analysis_H_Bottom)];
     [self.view addSubview:topView];
     
-    YCAnalysisBottomView *bottomView = [YCAnalysisBottomView bottomViewWithFrame:CGRectMake(0, YC_Analysis_H_Bottom, YC_ScreenWidth, YC_ScreenHeight - YC_Analysis_H_Bottom)];
+    YCAnalysisBottomView *bottomView = [YCAnalysisBottomView bottomViewWithFrame:CGRectMake(0, YC_Analysis_H_Bottom, YC_ScreenWidth, YC_ScreenHeight - YC_Analysis_H_Bottom - YC_TabBarBottomSafeMargin)];
     bottomView.delegate = topView;
     [bottomView setupInitData];
     [self.view addSubview:bottomView];

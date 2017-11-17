@@ -12,7 +12,7 @@
 
 @interface YCMainBiz : NSObject
 
-+ (void)mainWithParam:(YCMainParam *)param success:(void (^)())success failure:(void (^)(NSString *errorMsg))failure;
++ (void)mainWithParam:(YCMainParam *)param success:(void (^)(void))success failure:(void (^)(NSString *errorMsg))failure;
 
 + (void)mainInsertWithParam:(YCMainParam *)param;
 

@@ -12,6 +12,6 @@
 
 @interface YCLoginBiz : NSObject
 
-+ (void)loginWithParam:(YCLoginParam *)param success:(void (^)())success failure:(void (^)(NSString *errorMsg))failure;
++ (void)loginWithParam:(YCLoginParam *)param success:(void (^)(void))success failure:(void (^)(NSString *errorMsg))failure;
 
 @end

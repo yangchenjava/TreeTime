@@ -15,7 +15,7 @@
 
 @implementation YCMainBiz
 
-+ (void)mainWithParam:(YCMainParam *)param success:(void (^)())success failure:(void (^)(NSString *errorMsg))failure {
++ (void)mainWithParam:(YCMainParam *)param success:(void (^)(void))success failure:(void (^)(NSString *errorMsg))failure {
     NSDictionary *params = [[YCRequest requestWithDevID:nil index:102] JSONDictionaryFromModel:param];
     
     [YCHttpUtils sendPost:YC_URL(@"102") params:params success:^(NSHTTPURLResponse *response, id responseObject) {

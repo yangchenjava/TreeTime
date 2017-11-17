@@ -15,6 +15,7 @@
 #ifdef __OBJC__
 
 // 系统版本
+#define iOS11_OR_Later ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0)
 #define iOS10_OR_Later ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
 #define iOS9_OR_Later ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0)
 #define iOS8_OR_Later ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -23,6 +24,7 @@
 #define YC_iPhone5SE ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 #define YC_iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
 #define YC_iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
+#define YC_IPhoneX (YC_ScreenWidth == 375.0 && YC_ScreenHeight == 812.0 ? YES : NO)
 
 // 屏幕宽高
 #define YC_ScreenWidth \
@@ -32,9 +34,10 @@
 ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? [UIScreen mainScreen].nativeBounds.size.height / [UIScreen mainScreen].nativeScale : [UIScreen mainScreen].bounds.size.height)
 
 // 控件高度
-#define YC_StatusBarHeight 20.0
+#define YC_StatusBarHeight (YC_IPhoneX ? 44.0 : 20.0)
 #define YC_NavigationBarHeight 44.0
-#define YC_TabBarHeight 49.0
+#define YC_TabBarHeight (YC_IPhoneX ? (49.0 + 34.0) : 49.0)
+#define YC_TabBarBottomSafeMargin (YC_IPhoneX ? 34.0 : 0.0)
 #define YC_CellDefaultHeight 44.0
 #define YC_EnglishKeyboardHeight 216.0
 #define YC_ChineseKeyboardHeight 252.0
